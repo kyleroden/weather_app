@@ -6,11 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  <title>Bootstrap 101 Template</title>
+  <title>Weather is what?</title>
 
   <!-- Bootstrap -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-
+<!--custom css-->
+<link href="styles.css" rel="stylesheet">
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -21,19 +22,21 @@
 
 <body>
   <div class="container">
-    <h1>Weather App</h1>
-    <p>This gonna show the weather!</p>
-    <div id="weather_display">
-      <p>You are located in:</p>
+    <div class="row">
+      <div class="col-md-6">
+        <h1>Weather App</h1>
+        <p class="lead">This gonna show the weather!</p>
+        <div id="weather_display">
+          <p>You are located in:</p>
+          <div id="city_display">hi</div>
+          <p>Current temperature:</p>
+          <div id="weather_city_display">blank</div>
+          <p>Windspeed:</p>
+          <div id="wind_display"></div>
+        </div>
+      </div>
     </div>
-    <div id="city_display">hi</div>
-      <p>The temperature is:</p>
-    <div id="weather_city_display">blank</div>
-
   </div>
-
-
-
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
