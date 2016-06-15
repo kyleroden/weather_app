@@ -1,7 +1,31 @@
+
+#background_wrapper {
+   background-color: #FFFCD5;
+   padding-top: 0px;
+   margin-top: -20px;
+}
 #city_display,
-#weather_city_display,
+#current_temperature,
 #wind_display {
-  color: red;
+  color: darkblue;
   font-size: 1.4em;
   font-weight: 500;
+}
+.center-container {
+  text-align: center;
+}
+#update {
+  height: 5em;
+}
+#weather_icon_container {
+  height: 4em;
+}
+#temp_scale_button {
+  border: none;
+  background-color: white;
+  padding: .8em 2em;
+  border-radius: 8px;
+}
+#temp_scale_button:hover {
+  background-color: #BBEDFF;
 }

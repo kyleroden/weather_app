@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang="en">`
 
 <head>
   <meta charset="utf-8">
@@ -10,8 +9,8 @@
 
   <!-- Bootstrap -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-<!--custom css-->
-<link href="styles.css" rel="stylesheet">
+  <!--custom css-->
+  <link href="styles.css" rel="stylesheet">
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -21,18 +20,33 @@
 </head>
 
 <body>
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-md-6">
-        <h1>Weather App</h1>
-        <p class="lead">This gonna show the weather!</p>
+      <div class="col-md-12 center-container" id="background_wrapper">
+        <h2>Weather App</h2>
         <div id="weather_display">
-          <p>You are located in:</p>
           <div id="city_display">hi</div>
-          <p>Current temperature:</p>
-          <div id="weather_city_display">blank</div>
-          <p>Windspeed:</p>
-          <div id="wind_display"></div>
+          <div id="temp_container">
+            <div class="" id="farenheit_temperature">blank</div>
+            <div class="hide" id="celsius_temperature">blank</div>
+          </div>
+          <button onclick="temp_scale_changer()" id="temp_scale_button">F / C</button>
+          <div id="weather_icon_container"></div>
+          <div id="weather_description">
+          </div>
+          <div class="">
+          <div id="forecast_container">
+            <!--3 hr forecast-->
+            <div class="future_forecast"></div>
+            <!--tomorrow's forecast-->
+            <div class="future_forecast"></div>
+            <!--day after tomorrow forecast-->
+            <div class="future_forecast"></div>
+          </div>
+          </div>
+          <!--<p>wind:</p>
+          <div id="wind_display"></div>-->
+          <div id="footer">coded by <a href="http://www.github.com/kyleroden">Kyle Roden</a></div>
         </div>
       </div>
     </div>
@@ -40,7 +54,8 @@
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="script.js"></script>
+  <!--<script src="script.js"></script>-->
+  <script async src="https://use.fontawesome.com/7867b48cfa.js"></script>
 </body>
 
 </html>
