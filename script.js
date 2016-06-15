@@ -24,15 +24,53 @@ function show_weather() {
         document.getElementById("celsius_temperature").innerHTML = "<p class='lead'>" + celsius_temp + "</p>";
         //document.getElementById("wind_display").innerHTML = current_wind;
         document.getElementById("weather_icon_container").innerHTML = "<img src='http://openweathermap.org/img/w/" + weather_icon + ".png'>";
-          document.getElementById("weather_description").innerHTML = "<p class='lead'>" + weather_description + "</p>";
+        document.getElementById("weather_description").innerHTML = "<p class='lead'>" + weather_description + "</p>";
       });
     })
   })
 }
 
+function forecast_weather() {
+  var location2 = "http://ip-api.com/json";
+  var xhr = $.getJSON(location2, function(data) {
+    var lat = Math.floor(data.lat);
+    var long = Math.floor(data.lon);
+    xhr.done(function() {
+
+      var api_url = "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + long;
+      var api_key = "&APPID=4f730fe861842eaff00d58d1122003ea";
+      $.getJSON(api_url + api_key, function(forecast) {
+        console.log("second api data received")
+        //3hr forecast
+        var h3_forecast = Math.floor(1.8 * (forecast.list[0].main.temp - 273) + 32) + " F";
+        var tomorrow_forecast = forecast.list[0].weather[0].description;
+        var tomorrow_icon = forecast.list[0].weather[0].icon;
+        var tomorrow_timestamp = forecast.list[0].dt_txt;
+        //24hr forecast
+        var h24_forecast = Math.floor(1.8 * (forecast.list[7].main.temp - 273) + 32) + " F";
+        var h24_timestamp = forecast.list[7].dt_txt;
+        var h24_forecast_description = forecast.list[7].weather[0].description;
+        var h24_icon = forecast.list[7].weather[0].icon;
+        //write 3hr data
+        document.getElementById("3hr_temperature_forecast").innerHTML = "<p class='lead'>" + h3_forecast + "</p>";
+        document.getElementById("3hr_icon_container").innerHTML = "<img src='http://openweathermap.org/img/w/" + tomorrow_icon + ".png'>";
+        document.getElementById("3hr_forecast_description").innerHTML = "<p class='lead'>" + tomorrow_forecast + "</p>";
+        document.getElementById("tomorrow_time_stamp").innerHTML = "<p class='small'>" + tomorrow_timestamp + "</p>";
+        //write 24hr data
+        document.getElementById("24hr_temperature_forecast").innerHTML = "<p class='lead'>" + h24_forecast + "</p>";
+        document.getElementById("24hr_icon_container").innerHTML = "<img src='http://openweathermap.org/img/w/" + h24_icon + ".png'>";
+        document.getElementById("24hr_time_stamp").innerHTML = "<p class='small'>" + h24_timestamp + "</p>";
+        document.getElementById("tomorrow_forecast_description").innerHTML = "<p class='lead'>" + h24_forecast_description + "</p>";
+
+
+      });
+    });
+  });
+}
 //get the weather from open weather api
 $(document).ready(function() {
   show_weather();
+  forecast_weather();
 });
 
 //Toggle farenheit / celsius

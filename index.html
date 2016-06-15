@@ -31,18 +31,33 @@
             <div class="hide" id="celsius_temperature">blank</div>
           </div>
           <button onclick="temp_scale_changer()" id="temp_scale_button">F / C</button>
-          <div id="weather_icon_container"></div>
-          <div id="weather_description">
+          <div id="current_weather_container">
+            <div id="weather_icon_container"></div>
+            <div id="weather_description">
+            </div>
           </div>
           <div class="">
-          <div id="forecast_container">
-            <!--3 hr forecast-->
-            <div class="future_forecast"></div>
-            <!--tomorrow's forecast-->
-            <div class="future_forecast"></div>
-            <!--day after tomorrow forecast-->
-            <div class="future_forecast"></div>
-          </div>
+            <div id="forecast_container">
+              <!--3 hr forecast-->
+              <div class="future_forecast" id="3hr_forecast">
+                <p>3 hours</p>
+                <div id="3hr_temperature_forecast"></div>
+                <div id="3hr_icon_container"></div>
+                <div id="3hr_forecast_description"></div>
+                <div id="tomorrow_time_stamp"></div>
+
+              </div>
+              <!--tomorrow's forecast-->
+              <div class="future_forecast" id="tomorow_forecast">
+                <p>tomorrow</p>
+                <div id="24hr_temperature_forecast"></div>
+                <div id="24hr_icon_container"></div>
+                <div id="tomorrow_forecast_description"></div>
+                <div id="24hr_time_stamp"></div>
+              </div>
+              <!--day after tomorrow forecast-->
+              <div class="future_forecast" id="2d_forecast"></div>
+            </div>
           </div>
           <!--<p>wind:</p>
           <div id="wind_display"></div>-->
@@ -54,7 +69,7 @@
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <!--<script src="script.js"></script>-->
+  <script src="script.js"></script>
   <script async src="https://use.fontawesome.com/7867b48cfa.js"></script>
 </body>
 

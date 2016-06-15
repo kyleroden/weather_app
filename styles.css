@@ -17,8 +17,18 @@
 #update {
   height: 5em;
 }
-#weather_icon_container {
-  height: 4em;
+#current_weather_container {
+
+}
+#forecast_container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+.future_forecast  {
+  height: 6em;
+  width: 6em;
+  flex-basis: 25%;
 }
 #temp_scale_button {
   border: none;
