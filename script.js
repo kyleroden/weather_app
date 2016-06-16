@@ -47,25 +47,43 @@ function forecast_weather() {
         console.log("second api data received")
         //3hr forecast
         var h3_forecast = Math.floor(1.8 * (forecast.list[0].main.temp - 273) + 32) + " F";
+        var h3_cel_temp = Math.floor(forecast.list[0].main.temp - 273.15) + " C";
         var tomorrow_forecast = forecast.list[0].weather[0].description;
         var tomorrow_icon = forecast.list[0].weather[0].icon;
         var tomorrow_timestamp = forecast.list[0].dt_txt;
+        var tomorrow_time = tomorrow_timestamp.slice(5,-3);
         //24hr forecast
-        var h24_forecast = Math.floor(1.8 * (forecast.list[7].main.temp - 273) + 32) + " F";
-        var h24_timestamp = forecast.list[7].dt_txt;
-        var h24_forecast_description = forecast.list[7].weather[0].description;
-        var h24_icon = forecast.list[7].weather[0].icon;
+        var h24_forecast = Math.floor(1.8 * (forecast.list[4].main.temp - 273) + 32) + " F";
+        var h24_cel_temp = Math.floor(forecast.list[4].main.temp - 273.15) + " C";
+        var h24_timestamp = forecast.list[4].dt_txt;
+        var h24_time = h24_timestamp.slice(5,-3);
+        var h24_forecast_description = forecast.list[4].weather[0].description;
+        var h24_icon = forecast.list[4].weather[0].icon;
+        //48hr forecast
+        var h48_forecast = Math.floor(1.8 * (forecast.list[6].main.temp - 273) + 32) + " F";
+        var h48_cel_temp = Math.floor(forecast.list[6].main.temp - 273.15) + " C";
+        var h48_timestamp = forecast.list[6].dt_txt;
+        var h48_time = h48_timestamp.slice(5,-3);
+        var h48_forecast_description = forecast.list[6].weather[0].description;
+        var h48_icon = forecast.list[6].weather[0].icon;
         //write 3hr data
         document.getElementById("3hr_temperature_forecast").innerHTML = "<p class='lead'>" + h3_forecast + "</p>";
         document.getElementById("3hr_icon_container").innerHTML = "<img src='http://openweathermap.org/img/w/" + tomorrow_icon + ".png'>";
         document.getElementById("3hr_forecast_description").innerHTML = "<p class='lead'>" + tomorrow_forecast + "</p>";
-        document.getElementById("tomorrow_time_stamp").innerHTML = "<p class='small'>" + tomorrow_timestamp + "</p>";
+        document.getElementById("first_forecast_time").innerHTML = "<p class='small'>" + tomorrow_time + "</p>";
+        document.getElementById("3hr_celsius_temperature").innerHTML = "<p class='lead'>" + h3_cel_temp + "</p>";
         //write 24hr data
         document.getElementById("24hr_temperature_forecast").innerHTML = "<p class='lead'>" + h24_forecast + "</p>";
         document.getElementById("24hr_icon_container").innerHTML = "<img src='http://openweathermap.org/img/w/" + h24_icon + ".png'>";
-        document.getElementById("24hr_time_stamp").innerHTML = "<p class='small'>" + h24_timestamp + "</p>";
+        document.getElementById("second_forecast_time").innerHTML = "<p class='small'>" + h24_time + "</p>";
         document.getElementById("tomorrow_forecast_description").innerHTML = "<p class='lead'>" + h24_forecast_description + "</p>";
+        document.getElementById("24hr_celsius_temperature").innerHTML = "<p class='lead'>" + h24_cel_temp + "</p>";
         //write 48hr data
+        document.getElementById("48hr_temperature_forecast").innerHTML = "<p class='lead'>" + h48_forecast + "</p>";
+        document.getElementById("48hr_icon_container").innerHTML = "<img src='http://openweathermap.org/img/w/" + h48_icon + ".png'>";
+        document.getElementById("third_forecast_time").innerHTML = "<p class='small'>" + h48_time + "</p>";
+        document.getElementById("9pm_forecast_description").innerHTML = "<p class='lead'>" + h48_forecast_description + "</p>";
+        document.getElementById("48hr_celsius_temperature").innerHTML = "<p class='lead'>" + h48_cel_temp + "</p>";
 
 
       });
@@ -80,10 +98,16 @@ $(document).ready(function() {
 
 //Toggle farenheit / celsius
 function temp_scale_changer() {
-  if ($("#celsius_temperature").hasClass("hide")) {
-    $("#farenheit_temperature").toggleClass("hide");
-    $("#celsius_temperature").toggleClass("show");
-  } else {
-    $("#celsius_temperature").toggleClass("hide");
-  }
+  //if ($("#celsius_temperature").hasClass("hide")) {
+  //  $("#farenheit_temperature").toggleClass("hide");
+  //  $("#celsius_temperature").toggleClass("show");
+//  } else {
+//    $("#celsius_temperature").toggleClass("hide");
+//  }
+if ($(".cel_temp").hasClass("hide")) {
+  $(".faren_temp").toggleClass("hide");
+  $(".cel_temp").toggleClass("show");
+} else {
+  $(".cel_temp").toggleClass("hide");
+}
 }
