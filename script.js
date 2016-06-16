@@ -27,6 +27,10 @@ function show_weather() {
         document.getElementById("weather_description").innerHTML = "<p class='lead'>" + weather_description + "</p>";
       });
     })
+    xhr.fail(function(){
+      console.log("api call failed");
+      document.getElementById("weather_display").append("Sorry, there was an error and the weather cannot be displayed.");
+    });
   })
 }
 
@@ -61,6 +65,7 @@ function forecast_weather() {
         document.getElementById("24hr_icon_container").innerHTML = "<img src='http://openweathermap.org/img/w/" + h24_icon + ".png'>";
         document.getElementById("24hr_time_stamp").innerHTML = "<p class='small'>" + h24_timestamp + "</p>";
         document.getElementById("tomorrow_forecast_description").innerHTML = "<p class='lead'>" + h24_forecast_description + "</p>";
+        //write 48hr data
 
 
       });
