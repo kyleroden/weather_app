@@ -1,3 +1,4 @@
+/*font styles*/
 body {
   background-color: #152C40;
 }
@@ -8,8 +9,12 @@ p,
 i {
   color: #BCBFB7;
 }
+.temp_text {
+  font-size: 2em;
+}
+/* div and wrapper styles*/
+
 #background_wrapper {
-   /*background-color: #152C40;*/
    padding-top: 0px;
    margin-top: -20px;
    height: 100vh;
@@ -27,9 +32,7 @@ i {
 #update {
   height: 5em;
 }
-#current_weather_container {
 
-}
 #forecast_container {
   height: 15em;
   display: flex;
@@ -42,12 +45,13 @@ i {
 }
 #temp_scale_button {
   border: none;
+  transition: background-color 0.3s ease;
   background-color: white;
   padding: .8em 2em;
   border-radius: 8px;
 }
 #temp_scale_button:hover {
-  background-color: #58748C;
+  background-color: #F0F0F0;
 }
 #footer {
   display: flex;
