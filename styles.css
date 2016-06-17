@@ -1,6 +1,11 @@
-
+h1,
+h2,
+h3,
+p {
+  color: #BCBFB7;
+}
 #background_wrapper {
-   background-color: #FFFCD5;
+   background-color: #152C40;
    padding-top: 0px;
    margin-top: -20px;
    height: 100vh;
@@ -38,5 +43,5 @@
   border-radius: 8px;
 }
 #temp_scale_button:hover {
-  background-color: #BBEDFF;
+  background-color: #58748C;
 }
