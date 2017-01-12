@@ -24,13 +24,10 @@ function showWeather() {
     }).then(function(response) {
         return response.json();
       }).then(function(data) {
-        console.log(`data from weather api, fetch: ${data}`);
-        console.log(`${data.main.temp}`);
         const farenheit_temp = Math.floor(1.8 * (data.main.temp - 273) + 32) + " F";
         const celsius_temp = Math.floor(data.main.temp - 273.15) + " C";
         const weather_description = data.weather[0].description;
         const weather_icon = data.weather[0].icon;
-        console.log(weather_icon);
         const current_wind = Math.floor(2.237 * data.wind.speed);
         //populate both divs with temps, and hide one later on button click
         let f_temp = document.getElementById("farenheit_temperature");
@@ -40,7 +37,7 @@ function showWeather() {
 
         f_temp.innerHTML = `<p class='lead temp_text'>${farenheit_temp}</p>`;
         c_temp.innerHTML = `<p class='lead temp_text'>${celsius_temp}</p>`;
-        icon_container.innerHTML = `<img src='http://openweathermap.org/img/w/${weather_icon}.png`;
+        icon_container.innerHTML = `<img src='http://openweathermap.org/img/w/${weather_icon}.png'>`;
         description_container.innerHTML = `<p class='lead'>${weather_description}</p>`;
       }).catch(function(error) {
         console.log(error.message);
@@ -49,7 +46,7 @@ function showWeather() {
   //catching potential error from ip api (which gives lat and lon)
   }).catch(function(error) {
     document.getElementById("weather_display").append("Sorry, there was an error and the weather cannot be displayed.");
-    console.log(err.message);
+    console.log(error.message);
   });
 }
 
