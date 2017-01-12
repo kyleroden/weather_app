@@ -8,18 +8,17 @@ function showWeather() {
   }).then(function(response) {
     return response.json()
   }).then(function(data) {
-  	console.log("The Data: ", data);
     const country = data.countryCode;
     const city = data.city;
     const region = data.regionName;
     const lat = Math.floor(data.lat);
     const lon = Math.floor(data.lon);
     const display_city = document.getElementById("city_display");
-    display_city.innerHTML = '<p class="lead">' + city + ", " + region + ", " + country + '</p>';
-    console.log(`lat: ${lat} lon: ${lon}`)
     //now that we have the lat and long data from the ip api, we can do a fetch on the openweather api
     const weather_url = 'http://api.openweathermap.org/data/2.5/weather?';
     const api_key = "&APPID=4f730fe861842eaff00d58d1122003ea";
+    //display the city, state/region and country given by the ip api (based on lat/lon)
+    display_city.innerHTML = `<p class="lead">${city}, ${region}, ${country}</p>`;
     fetch(weather_url + `lat=${lat}&lon=${lon}${api_key}`, {
       method: 'GET'
     }).then(function(response) {
@@ -43,14 +42,14 @@ function showWeather() {
         c_temp.innerHTML = `<p class='lead temp_text'>${celsius_temp}</p>`;
         icon_container.innerHTML = `<img src='http://openweathermap.org/img/w/${weather_icon}.png`;
         description_container.innerHTML = `<p class='lead'>${weather_description}</p>`;
-      }).catch(function(err) {
+      }).catch(function(error) {
         console.log(error.message);
         document.getElementById("weather_display").append("Sorry, there was an error and the weather cannot be displayed.");
       });
   //catching potential error from ip api (which gives lat and lon)
-  }).catch(function(err) {
+  }).catch(function(error) {
     document.getElementById("weather_display").append("Sorry, there was an error and the weather cannot be displayed.");
-    console.log(error.message);
+    console.log(err.message);
   });
 }
 
