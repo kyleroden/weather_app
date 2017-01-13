@@ -11,31 +11,6 @@ const forecast_url = "http://api.openweathermap.org/data/2.5/forecast?"
 //....uh....
 const api_key = "&APPID=4f730fe861842eaff00d58d1122003ea";
 
-//object to hold the user's location data
-const user_location_data = {
-  city: '',
-  region: '',
-  country: '',
-  lat: 0,
-  lon: 0
-}
-function getLocationData() {
-  const userLocData = user_location_data;
-  fetch(ip_url, {
-    method: 'GET'
-      }).then(function(response) {
-    	   return response.json();
-      }).then(function(ip_data) {
-      	 userLocData[city] = ip_data.city;
-         console.log("call from the second ip api call: ", userLocData.city);
-         return userLocData;
-      }).catch(function(err) {
-    	// Error :(
-  });
-}
-//getLocationData();
-console.log("global scope, location object: ", user_location_data)
-
 function showWeather() {
     //use fetch for the lat and long data
     fetch(ip_url, {
