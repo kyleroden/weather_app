@@ -1,10 +1,13 @@
 'use strict';
 
-//IIFE
+//all functions and variables in one scope, after dom is loaded
 document.addEventListener('DOMContentLoaded', function(){
+//url for ip-api which gets user coords
+const ip_url = "http://ip-api.com/json";
+//url for the current weather api
+const weather_url = 'http://api.openweathermap.org/data/2.5/weather?';
 
-  function showWeather() {
-    const ip_url = "http://ip-api.com/json";
+function showWeather() {
     //use fetch for the lat and long data
     fetch(ip_url, {
       method: 'GET'
@@ -18,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function(){
       const lon = Math.floor(data.lon);
       const display_city = document.getElementById("city_display");
       //now that we have the lat and long data from the ip api, we can do a fetch on the openweather api
-      const weather_url = 'http://api.openweathermap.org/data/2.5/weather?';
       const api_key = "&APPID=4f730fe861842eaff00d58d1122003ea";
       //display the city, state/region and country given by the ip api (based on lat/lon)
       display_city.innerHTML = `<p class="lead">${city}, ${region}, ${country}</p>`;
@@ -54,8 +56,7 @@ document.addEventListener('DOMContentLoaded', function(){
   }
 
   function forecast_weather() {
-    const location2 = "http://ip-api.com/json";
-    const xhr = $.getJSON(location2, function(data) {
+    const xhr = $.getJSON(ip_url, function(data) {
       const lat = Math.floor(data.lat);
       const long = Math.floor(data.lon);
       xhr.done(function() {
@@ -108,18 +109,6 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   }
 
-  //Toggle farenheit / celsius
-  /*
-  function temp_scale_changer() {
-  if ($(".cel_temp").hasClass("hide")) {
-    $(".faren_temp").toggleClass("hide");
-    $(".cel_temp").toggleClass("show");
-  } else {
-    $(".cel_temp").toggleClass("hide");
-  }
-  }
-  */
-
   //run the scripts
   showWeather();
   forecast_weather();
@@ -133,15 +122,15 @@ function temp_scale_changer() {
 
   celsius_temps.forEach(function(c_temp){
     if(c_temp.classList) {
-      c_temp.classList.toggle('show');
+      c_temp.classList.toggle('hide');
     } else {
       let classes = c_temp.className.split(' ');
-      let existingIndex = classes.indexOf('show');
+      let existingIndex = classes.indexOf('hide');
 
       if(existingIndex >= 0) {
         classes.splice(existingIndex, 1);
       } else {
-        classes.push('show');
+        classes.push('hide');
       }
       c_temp.className = classes.join(' ');
     }
