@@ -6,13 +6,42 @@ document.addEventListener('DOMContentLoaded', function(){
 const ip_url = "http://ip-api.com/json";
 //url for the current weather api
 const weather_url = 'http://api.openweathermap.org/data/2.5/weather?';
+//url for forecast weather api
+const forecast_url = "http://api.openweathermap.org/data/2.5/forecast?"
+//....uh....
+const api_key = "&APPID=4f730fe861842eaff00d58d1122003ea";
+
+//object to hold the user's location data
+const user_location_data = {
+  city: '',
+  region: '',
+  country: '',
+  lat: 0,
+  lon: 0
+}
+function getLocationData() {
+  const userLocData = user_location_data;
+  fetch(ip_url, {
+    method: 'GET'
+      }).then(function(response) {
+    	   return response.json();
+      }).then(function(ip_data) {
+      	 userLocData[city] = ip_data.city;
+         console.log("call from the second ip api call: ", userLocData.city);
+         return userLocData;
+      }).catch(function(err) {
+    	// Error :(
+  });
+}
+//getLocationData();
+console.log("global scope, location object: ", user_location_data)
 
 function showWeather() {
     //use fetch for the lat and long data
     fetch(ip_url, {
       method: 'GET'
     }).then(function(response) {
-      return response.json()
+      return response.json();
     }).then(function(data) {
       const country = data.countryCode;
       const city = data.city;
@@ -54,36 +83,42 @@ function showWeather() {
       console.log(error.message);
     });
   }
-
-  function forecast_weather() {
-    const xhr = $.getJSON(ip_url, function(data) {
-      const lat = Math.floor(data.lat);
-      const long = Math.floor(data.lon);
-      xhr.done(function() {
-        const api_url = "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + long;
-        const api_key = "&APPID=4f730fe861842eaff00d58d1122003ea";
-        $.getJSON(api_url + api_key, function(forecast) {
+function forecastWeather() {
+  fetch(ip_url, {
+    method: 'GET'
+      }).then(function(response) {
+         return response.json();
+      }).then(function(ip_data) {
+        const lat = Math.floor(ip_data.lat);
+        const lon = Math.floor(ip_data.lon);
+        console.log("forecastWeather call lat: ", lat);
+        //now make the call to the forecast api
+        fetch(forecast_url + `lat=${lat}&lon=${lon}${api_key}`, {
+          method: 'GET'
+        }).then(function(response) {
+          return response.json();
+        }).then(function(forecast_data){
           //3hr forecast
-          const h3_forecast = Math.floor(1.8 * (forecast.list[0].main.temp - 273) + 32) + " F";
-          const h3_cel_temp = Math.floor(forecast.list[0].main.temp - 273.15) + " C";
-          const tomorrow_forecast = forecast.list[0].weather[0].description;
-          const tomorrow_icon = forecast.list[0].weather[0].icon;
-          const tomorrow_timestamp = forecast.list[0].dt_txt;
+          const h3_forecast = Math.floor(1.8 * (forecast_data.list[0].main.temp - 273) + 32) + " F";
+          const h3_cel_temp = Math.floor(forecast_data.list[0].main.temp - 273.15) + " C";
+          const tomorrow_forecast = forecast_data.list[0].weather[0].description;
+          const tomorrow_icon = forecast_data.list[0].weather[0].icon;
+          const tomorrow_timestamp = forecast_data.list[0].dt_txt;
           const tomorrow_time = tomorrow_timestamp.slice(5,-3);
           //24hr forecast
-          const h24_forecast = Math.floor(1.8 * (forecast.list[4].main.temp - 273) + 32) + " F";
-          const h24_cel_temp = Math.floor(forecast.list[4].main.temp - 273.15) + " C";
-          const h24_timestamp = forecast.list[4].dt_txt;
+          const h24_forecast = Math.floor(1.8 * (forecast_data.list[4].main.temp - 273) + 32) + " F";
+          const h24_cel_temp = Math.floor(forecast_data.list[4].main.temp - 273.15) + " C";
+          const h24_timestamp = forecast_data.list[4].dt_txt;
           const h24_time = h24_timestamp.slice(5,-3);
-          const h24_forecast_description = forecast.list[4].weather[0].description;
-          const h24_icon = forecast.list[4].weather[0].icon;
+          const h24_forecast_description = forecast_data.list[4].weather[0].description;
+          const h24_icon = forecast_data.list[4].weather[0].icon;
           //48hr forecast
-          const h48_forecast = Math.floor(1.8 * (forecast.list[6].main.temp - 273) + 32) + " F";
-          const h48_cel_temp = Math.floor(forecast.list[6].main.temp - 273.15) + " C";
-          const h48_timestamp = forecast.list[6].dt_txt;
+          const h48_forecast = Math.floor(1.8 * (forecast_data.list[6].main.temp - 273) + 32) + " F";
+          const h48_cel_temp = Math.floor(forecast_data.list[6].main.temp - 273.15) + " C";
+          const h48_timestamp = forecast_data.list[6].dt_txt;
           const h48_time = h48_timestamp.slice(5,-3);
-          const h48_forecast_description = forecast.list[6].weather[0].description;
-          const h48_icon = forecast.list[6].weather[0].icon;
+          const h48_forecast_description = forecast_data.list[6].weather[0].description;
+          const h48_icon = forecast_data.list[6].weather[0].icon;
           //write 3hr data
           document.getElementById("3hr_temperature_forecast").innerHTML = "<p class='lead temp_text'>" + h3_forecast + "</p>";
           document.getElementById("3hr_icon_container").innerHTML = "<img src='http://openweathermap.org/img/w/" + tomorrow_icon + ".png'>";
@@ -103,15 +138,16 @@ function showWeather() {
           document.getElementById("9pm_forecast_description").innerHTML = "<p class='lead'>" + h48_forecast_description + "</p>";
           document.getElementById("48hr_celsius_temperature").innerHTML = "<p class='lead temp_text'>" + h48_cel_temp + "</p>";
 
-
-        });
-      });
+        }).catch(function(error) {
+        console.log("error from forecastWeather: ", error.message);
     });
-  }
-
+  }).catch(function(error) {
+    console.log("error from forecastWeather function, ip-api");
+  });
+}
   //run the scripts
   showWeather();
-  forecast_weather();
+  forecastWeather();
 });
 
 
