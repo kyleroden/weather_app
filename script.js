@@ -28,6 +28,7 @@ function showWeather() {
       const api_key = "&APPID=4f730fe861842eaff00d58d1122003ea";
       //display the city, state/region and country given by the ip api (based on lat/lon)
       display_city.innerHTML = `<p class="lead">${city}, ${region}, ${country}</p>`;
+      //second api call to the current weather api
       fetch(weather_url + `lat=${lat}&lon=${lon}${api_key}`, {
         method: 'GET'
       }).then(function(response) {
@@ -48,6 +49,7 @@ function showWeather() {
           c_temp.innerHTML = `<p class='lead temp_text'>${celsius_temp}</p>`;
           icon_container.innerHTML = `<img src='http://openweathermap.org/img/w/${weather_icon}.png'>`;
           description_container.innerHTML = `<p class='lead'>${weather_description}</p>`;
+          //catch for current weather api
         }).catch(function(error) {
           console.log(error.message);
           document.getElementById("weather_display").append("Sorry, there was an error and the weather cannot be displayed.");
@@ -66,13 +68,13 @@ function forecastWeather() {
       }).then(function(ip_data) {
         const lat = Math.floor(ip_data.lat);
         const lon = Math.floor(ip_data.lon);
-        console.log("forecastWeather call lat: ", lat);
         //now make the call to the forecast api
         fetch(forecast_url + `lat=${lat}&lon=${lon}${api_key}`, {
           method: 'GET'
         }).then(function(response) {
           return response.json();
         }).then(function(forecast_data){
+          console.log("Forecast api data: ", forecast_data);
           //3hr forecast
           const h3_forecast = Math.floor(1.8 * (forecast_data.list[0].main.temp - 273) + 32) + " F";
           const h3_cel_temp = Math.floor(forecast_data.list[0].main.temp - 273.15) + " C";
