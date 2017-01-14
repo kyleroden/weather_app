@@ -83,13 +83,19 @@ function forecastWeather() {
           const first_forecast_timestamp = forecast_data.list[0].dt_txt;
           const first_forecast_time = first_forecast_timestamp.slice(5,-3);
           let first_forecast_hrs = first_forecast_time.slice(6,8);//hour (2 digits)
+          let first_forecast_div = document.getElementById("first_forecast_time");
           //convert from military /unix time
           if(first_forecast_hrs > 12) {
             first_forecast_hrs = first_forecast_hrs % 12;//
             let first_hrs_str = first_forecast_hrs.toString();
             //first_hrs_str.trim();
             first_hrs_str += " PM";
-            document.getElementById("first_forecast_time").innerHTML = "<p class='small'>" + first_hrs_str + "</p>";
+            first_forecast_div.innerHTML = "<p class='small'>" + first_hrs_str + "</p>";
+          } else {
+            let first_hrs_str = first_forecast_hrs.toString();
+            //first_hrs_str.trim();
+            first_hrs_str += " AM";
+            first_forecast_div.innerHTML = "<p class='small'>" + first_hrs_str + "</p>";
           }
 
           //24hr forecast
