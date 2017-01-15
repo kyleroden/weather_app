@@ -102,11 +102,8 @@ function forecastWeather() {
           const h24_forecast = Math.floor(1.8 * (forecast_data.list[4].main.temp - 273) + 32) + " F";
           const h24_cel_temp = Math.floor(forecast_data.list[4].main.temp - 273.15) + " C";
           const h24_timestamp = forecast_data.list[4].dt_txt;
-          console.log(h24_timestamp, "h24_timestamp");
           const h24_time = h24_timestamp.slice(5,-3);
           let fifth_forecast_hrs = h24_time.slice(6,8);
-          console.log("fifth_forecast_hrs", fifth_forecast_hrs)
-          console.log("h24_time: ", h24_time);
           let fifth_forecast_div = document.getElementById("fifth_forecast_time");
           if (fifth_forecast_hrs > 12) {
             fifth_forecast_hrs = fifth_forecast_hrs % 12;
@@ -120,11 +117,25 @@ function forecastWeather() {
           }
           const h24_forecast_description = forecast_data.list[4].weather[0].description;
           const h24_icon = forecast_data.list[4].weather[0].icon;
+
           //48hr forecast
           const h48_forecast = Math.floor(1.8 * (forecast_data.list[6].main.temp - 273) + 32) + " F";
           const h48_cel_temp = Math.floor(forecast_data.list[6].main.temp - 273.15) + " C";
           const h48_timestamp = forecast_data.list[6].dt_txt;
           const h48_time = h48_timestamp.slice(5,-3);
+          let seventh_forecast_hrs = h48_time.slice(6,8);
+          let seventh_forecast_div = document.getElementById("seventh_forecast_time");
+
+          if(seventh_forecast_hrs > 12) {
+            seventh_forecast_hrs = seventh_forecast_hrs % 12;
+            let seventh_hrs_str = seventh_forecast_hrs.toString();
+            seventh_hrs_str += " PM";
+            seventh_forecast_div.innerHTML = "<p class='small'>" + seventh_hrs_str + "</p>";
+          } else {
+            let seventh_hrs_str = seventh_forecast_hrs.toString();
+            seventh_hrs_str += " AM";
+            seventh_forecast_div.innerHTML = "<p class='small'>" + seventh_hrs_str + "</p>";
+          }
           const h48_forecast_description = forecast_data.list[6].weather[0].description;
           const h48_icon = forecast_data.list[6].weather[0].icon;
           //write 3hr data
