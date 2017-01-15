@@ -142,18 +142,15 @@ function forecastWeather() {
           document.getElementById("3hr_temperature_forecast").innerHTML = "<p class='lead temp_text'>" + h3_forecast + "</p>";
           document.getElementById("3hr_icon_container").innerHTML = "<img src='http://openweathermap.org/img/w/" + first_forecast_icon + ".png'>";
           document.getElementById("3hr_forecast_description").innerHTML = "<p class='lead'>" + first_forecast + "</p>";
-          //document.getElementById("first_forecast_time").innerHTML = "<p class='small'>" + first_forecast_time + "</p>";
           document.getElementById("3hr_celsius_temperature").innerHTML = "<p class='lead temp_text'>" + h3_cel_temp + "</p>";
           //write 24hr data
           document.getElementById("24hr_temperature_forecast").innerHTML = "<p class='lead temp_text'>" + h24_forecast + "</p>";
           document.getElementById("24hr_icon_container").innerHTML = "<img src='http://openweathermap.org/img/w/" + h24_icon + ".png'>";
-          //document.getElementById("fifth_forecast_time").innerHTML = "<p class='small'>" + h24_time + "</p>";
           document.getElementById("tomorrow_forecast_description").innerHTML = "<p class='lead'>" + h24_forecast_description + "</p>";
           document.getElementById("24hr_celsius_temperature").innerHTML = "<p class='lead temp_text'>" + h24_cel_temp + "</p>";
           //write 48hr data
           document.getElementById("48hr_temperature_forecast").innerHTML = "<p class='lead temp_text'>" + h48_forecast + "</p>";
           document.getElementById("48hr_icon_container").innerHTML = "<img src='http://openweathermap.org/img/w/" + h48_icon + ".png'>";
-          document.getElementById("third_forecast_time").innerHTML = "<p class='small'>" + h48_time + "</p>";
           document.getElementById("9pm_forecast_description").innerHTML = "<p class='lead'>" + h48_forecast_description + "</p>";
           document.getElementById("48hr_celsius_temperature").innerHTML = "<p class='lead temp_text'>" + h48_cel_temp + "</p>";
 
