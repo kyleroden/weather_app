@@ -19,6 +19,9 @@ i {
 .new_class {
   
 }
+a:hover {
+  color: #BCBFB7;
+}
 /* div and wrapper styles*/
 
 #background_wrapper {
